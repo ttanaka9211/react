@@ -23,74 +23,53 @@ import './App.css';
 //    </div>
 //  );
 //}
-class App extends Component {
- input = '';
-
-  msgStyle = {
-    fontSize:'20pt',
-    color:'#900', 
-    margin:'20px 0px',
-    padding:'5px'
-  }
-
-  constructor(props){
-    super(props);
-    this.state = {
-      message:'type your name:'
-    };
-    this.doChange = this.doChange.bind(this);
-    this.doSubmit = this.doSubmit.bind(this);
-  }
-
-  doChange(event){
-    this.input = event.target.value;
-  }
-
-  doSubmit(event){
-    this.setState({
-      message: 'Hello,' + this.input + '!!'
-    });
-    event.preventDefault();
-  }
-  render(){
-    return<div>
-      <h1>React</h1>
-      <Message title='Children!'>
-        これはコンポーネント内のコンテンツです。
-        マルでテキストを分解し、リストにして表示します。
-        改行は必要ありません。
-      </Message>
-    </div>;
+let theme = {
+  light:{
+    backgroundColor:'#eef',
+    color:'#006',
+    padding:'10px'
+  },
+  dark:{
+    backgroundColor:'#006',
+    color:'#eef',
+    padding:'10px'
   }
 }
 
-class Message extends Component {
-  li = {
-    fontSize:'16pt',
-    color:'#06',
-    margin:'0px',
-    padding:'0px',
-  }
+const ThemeContext = React.createContext(theme.dark);
+
+class App extends Component {  
+  static contextType = ThemeContext;
 
   render(){
-    let content = this.props.children;
-    let arr = content.split('。');
-    let arr2 = [];
-    for(let i = 0;i < arr.length;i++){
-      if (arr[i].trim() != ''){
-        arr2.push(arr[i]);
-      }
-    }
-    let list = arr2.map((value,key)=>(
-      <li style={this.li} key={key}>{value}.</li>
-    ));
-    return(
-      <div>
-        <h2>{this.props.title}</h2>
-        <ol>{list}</ol>
+    return (
+      <div style={this.context}>
+        <Title value = 'Content page' />
+        <Message value = 'this is content sample.' />
+        <Message value = '*これはテーマのサンプルです。' />
       </div>
     );
+   }
   }
-} 
+
+  class Title extends Component {
+    static contextType = ThemeContext;
+
+    render(){
+      return(
+        <h2 style = {this.context}>{this.props.value}</h2>
+      );
+    }
+  }
+
+  class Message extends Component {
+    static contextType = ThemeContext;
+
+    render(){
+      return(
+        <p style={this.context}>{this.props.value}</p>
+      );
+    }
+  }
 
 export default App;
