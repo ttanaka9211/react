@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import logo from './logo.svg';
 import './App.css';
 import Memo from './memo/Memo';
 import AddForm from './memo/AddForm';
@@ -13,12 +12,12 @@ class App extends Component {
     width:'250px'
   }
 
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
   render() {
-    return (
+    return(
       <div>
         <h1>Memo</h1>
         <AddForm />
@@ -26,8 +25,8 @@ class App extends Component {
         <table><tbody><tr>
           <td style={this.td}><FindForm /></td>
           <td style={this.td}><DelForm /></td>
-          </tr></tbody></table>
-          <Memo />
+        </tr></tbody></table>
+        <Memo />
       </div>
     );
   }
