@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addMemo } from './Stre';
+import { addMemo } from './Store';
 
 class AddForm extends Component {
     input = {
